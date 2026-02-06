@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pick Carefully 💘</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffe6ef, #ffc3d4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      width: 330px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .names button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      background: #ff6f91;
+      color: white;
+      transition: transform 0.2s;
+    }
+
+    .names button:hover {
+      transform: scale(1.05);
+    }
+
+    .penalty {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #ff3b6f;
+      animation: shake 0.4s;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .final {
+      font-size: 20px;
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* floating hearts & sparkles */
+    .float {
+      position: absolute;
+      bottom: -20px;
+      animation: floatUp 6s infinite;
+      opacity: 0.8;
+      font-size: 20px;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const emojis = ["💖","✨","💗","💫","🤍"];
+  setInterval(() => {
+    const e = document.createElement("span");
+    e.className = "float";
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.fontSize = (16 + Math.random() * 22) + "px";
+    e.style.animationDuration = (4 + Math.random() * 4) + "s";
+    e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 8000);
+  }, 600);
+</script>
+
+<div class="card">
+  <div id="game">
+    <h2>🎮 Mini Game</h2>
+    <p><strong>Who’s your little yeye?</strong></p>
+
+    <div class="names">
+      <button onclick="wrongPick()">Emily</button>
+      <button onclick="wrongPick()">Jessica</button>
+      <button onclick="rightPick()">Sarah</button>
+      <button onclick="wrongPick()">Olivia</button>
+    </div>
+
+    <div id="penalty" class="penalty hidden"></div>
+  </div>
+
+  <div id="final" class="final hidden">
+    🎉💖  
+    <br><br>
+    yay! she’s your little yeye  
+    <br>
+    let me be your only one forever  
+    <br><br>
+    🤍♾️
+  </div>
+</div>
+
+<script>
+  const penalties = [
+    "❌ wrong choice… awkward 😬",
+    "❌ nope… try again 😏",
+    "❌ absolutely not, sir",
+    "❌ incorrect… think harder 🧠"
+  ];
+
+  function wrongPick() {
+    const p = document.getElementById("penalty");
+    p.classList.remove("hidden");
+    p.textContent = penalties[Math.floor(Math.random() * penalties.length)];
+  }
+
+  function rightPick() {
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("final").classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>
